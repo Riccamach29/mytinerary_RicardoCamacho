@@ -3,6 +3,7 @@ import HeroSection from './components/HeroSection'
 import Home from './components/Home'
 import Login from './components/Login'
 import Cities from './components/Cities'
+import Details from './components/Details'
 import NotFound from './components/NotFound'
 import HeroLayout from './layouts/HeroLayout'
 import MainLayout from './layouts/MainLayout'
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/details",
+        element: <Details />,
       },
     ],
   },

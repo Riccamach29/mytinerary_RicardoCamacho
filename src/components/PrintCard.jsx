@@ -1,3 +1,5 @@
+import Button from "./Button";
+
 const PrintCard = ({ city }) => {
   return (
     <div
@@ -40,28 +42,16 @@ const PrintCard = ({ city }) => {
           </p>
         </div>
 
-        {/* Landmarks */}
-        <div className="mt-4 w-full">
-          <h3 className="text-lg font-semibold mb-2">Landmarks</h3>
-          <div className="space-y-2 max-h-40 overflow-y-auto">
-            {city.landmarks.map((landmark, index) => (
-              <div
-                key={index}
-                className="flex items-center gap-2 bg-white/20 p-2 rounded"
-              >
-                <img
-                  src={landmark.photo}
-                  alt={landmark.name}
-                  className="w-12 h-12 rounded object-cover"
-                />
-                <div className="text-left">
-                  <p className="text-sm font-medium">{landmark.name}</p>
-                  <p className="text-xs">{landmark.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Botón de reserva */}
+        <div className="mt-4">
+        <Button 
+          ruta="/details" 
+          text="Details" 
+          cityId={city._id} 
+          state={{ cityData: city }} 
+        />
+      </div>
+
       </div>
     </div>
   );
