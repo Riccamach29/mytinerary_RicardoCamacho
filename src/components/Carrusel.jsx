@@ -91,8 +91,8 @@ export default function SwiperCarousel({ images, autoplay = true, delay = 3000 }
               md:h-[450px] 
               lg:h-[500px] 
               xl:h-[550px]
-              bg-transparent 
-              [&>*]:p-1"> {/* Añadido padding para eliminar líneas blancas */}
+              "
+              > 
               {group.map((img, index) => (
                 <div 
                   key={index} 

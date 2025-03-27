@@ -14,14 +14,14 @@ export default function Cities() {
   );
 
   return (
-    <div className="h-auto min-h-[90vh] bg-[#e2e8f0] text-amber-100 flex flex-col items-center p-6">
-      <h1 className="text-4xl font-semibold text-red-900 mb-8">Explore Cities</h1>
+    <div className="h-auto min-h-[90vh] bg-[#e2e8f0] text-amber-100 flex flex-col items-center p-6 pt-22">
+      <h1 className="text-4xl font-semibold text-red-900 mb-2">Explore Cities</h1>
 
       {/* 🔎 Input de búsqueda */}
       <input
         type="text"
         placeholder="Search City..."
-        className="w-80 p-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 text-black"
+        className="w-75 p-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 text-black"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
