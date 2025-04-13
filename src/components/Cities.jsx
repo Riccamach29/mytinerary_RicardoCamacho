@@ -35,7 +35,7 @@ export default function Cities() {
           filteredCities.map((city) => <PrintCard key={city.name} city={city} />)
         ) : (
           <p className="text-red-900 text-lg font-semibold bg-white p-4 rounded-lg shadow-md">
-            ❌ No cities start with "<span className="font-bold">{search}</span>"
+            ❌ No cities start with <span className="font-bold">{search}</span>
           </p>
         )}
       </div>
