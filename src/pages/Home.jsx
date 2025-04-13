@@ -1,4 +1,4 @@
-import Carousel from "./Carrusel";
+import Carousel from "../components/Carrusel";
 
 const icelandCities = {
   cities: [
