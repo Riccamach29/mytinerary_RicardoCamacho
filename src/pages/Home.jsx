@@ -1,46 +1,31 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Carousel from "../components/Carrusel";
-import {getAllData} from "../components/axios";
+import { fetchCarouselImages } from "../redux/actions/carruselAction";
+import { statusTypes } from "../redux/reducers/carruselReducer";
 
 export default function Home() {
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { images, status, error } = useSelector(state => state.carousel);
+  const isLoading = status === statusTypes.PENDING;
   const API_URL = "http://localhost:8080/api/cities/allCities";
 
   useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        const citiesData = await getAllData(API_URL, true);
-        const imageUrls = citiesData.map(city => city.photo);
-        setImages(imageUrls);
-      } catch (error) {
-        console.error("Error fetching images:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchImages();
-  }, []);
-  
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+    dispatch(fetchCarouselImages(API_URL));
+  }, [dispatch]);
 
   return (
-    <div className="h-[90vh] bg-[#e2e8f0] text-gray-900 flex flex-row gap-4 justify-center items-center">
-      <div className="h-[75vh] w-[80%] mt-22 rounded flex justify-center items-center 
-                    bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300 
-                    shadow-lg backdrop-blur-md bg-opacity-80 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full 
-                      bg-[url('https://www.transparenttextures.com/patterns/fresh-snow.png')] 
-                      opacity-80" />
-
-        <div className="w-[90%] z-10">
+    <div className="min-h-screen pt-22 bg-[#e2e8f0] flex flex-col items-center justify-center">
+      <div className="w-[80vw] bg-blue-200 rounded-lg shadow-lg p-2 text-center">
+        {isLoading ? (
+          <div className="animate-spin rounded-full h-8 w-8 border-2 border-blue-500 border-t-transparent mx-auto" />
+        ) : error ? (
+          <p className="text-red-500">Error: {error}</p>
+        ) : images.length > 0 ? (
           <Carousel images={images} />
-          
-        </div>
+        ) : (
+          <p className="text-gray-500">No images available.</p>
+        )}
       </div>
     </div>
   );
