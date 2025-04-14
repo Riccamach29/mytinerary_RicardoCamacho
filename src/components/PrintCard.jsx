@@ -3,8 +3,9 @@ import Button from "./Button";
 
 const PrintCard = ({ city }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  // Precarga de imagen
+  // Image preload
   useEffect(() => {
     const img = new Image();
     img.src = city.photo;
@@ -14,7 +15,9 @@ const PrintCard = ({ city }) => {
   return (
     <div
       key={city._id}
-      className="w-75 h-120 relative group overflow-hidden rounded-lg shadow-lg"
+      className="w-75 h-120 relative overflow-hidden rounded-lg shadow-lg"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className={`
         w-full h-full transition-opacity duration-300
@@ -24,15 +27,19 @@ const PrintCard = ({ city }) => {
           src={city.photo}
           alt={city.name}
           loading="lazy"
-          className="w-full h-full object-cover transition-all duration-200 
-                    ease-in-out group-hover:scale-110 group-hover:grayscale"
+          className={`
+            w-full h-full object-cover transition-transform duration-500
+            ${isHovered ? 'scale-110 grayscale' : 'scale-100'}
+          `}
         />
 
-        <div className="absolute inset-0 bg-white/20 backdrop-blur-sm opacity-0 
-                    translate-y-full transition-all duration-700 ease-in-out
-                    group-hover:opacity-100 group-hover:translate-y-0
-                    flex flex-col justify-center items-center 
-                    text-black p-4 text-center">
+        <div className={`
+          absolute inset-0 bg-white/20 backdrop-blur-sm
+          flex flex-col justify-center items-center 
+          text-black p-4 text-center
+          transition-all duration-500 ease-in-out
+          ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}
+        `}>
           <h2 className="text-2xl font-bold mb-2">{city.name}</h2>
           <p className="mb-2">
             {city.country}, {city.continent}
