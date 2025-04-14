@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import PrintCard from "../components/PrintCard";
 import { changeSearch } from "../redux/actions/filterActions";
+import { getAllData } from "../components/axios";
 
 export default function Cities() {
   const [cities, setCities] = useState([]);
@@ -14,11 +14,12 @@ export default function Cities() {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await axios.get(API_URL);
-        const citiesData = response.data.response;
+        const citiesData = await getAllData(API_URL, true);
         setCities(citiesData);
+        console.log(citiesData);
+        
       } catch (error) {
-        console.error("Error fetching cities:", error);
+        console.error("Error in Cities component:", error);
       } finally {
         setIsLoading(false);
       }
@@ -26,7 +27,7 @@ export default function Cities() {
 
     fetchCities();
   }, []);
-  
+
   const filteredCities = cities.filter(city => 
     city.name.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
@@ -40,7 +41,7 @@ export default function Cities() {
   }
 
   return (
-    <div className="min-h-[90vh] bg-[#e2e8f0] text-amber-100 flex flex-col items-center p-6 pt-22">
+    <div className="min-h-[90vh] bg-[#e2e8f0] text-amber-100 flex flex-col items-center pt-24">
       <input
         type="text"
         placeholder="Search City..."
@@ -49,7 +50,7 @@ export default function Cities() {
         onChange={(e) => dispatch(changeSearch(e.target.value))}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-7xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 justify-center w-full max-w-7xl">
         {filteredCities.map((city) => (
           <PrintCard key={city._id} city={city} />
         ))}

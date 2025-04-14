@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Carousel from "../components/Carrusel";
+import {getAllData} from "../components/axios";
 
 export default function Home() {
   const [images, setImages] = useState([]);
@@ -10,8 +11,8 @@ export default function Home() {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await axios.get(API_URL);
-        const imageUrls = response.data.response.map(city => city.photo);
+        const citiesData = await getAllData(API_URL, true);
+        const imageUrls = citiesData.map(city => city.photo);
         setImages(imageUrls);
       } catch (error) {
         console.error("Error fetching images:", error);
@@ -21,8 +22,8 @@ export default function Home() {
     };
 
     fetchImages();
-  }, []); // Solo se ejecuta una vez al montar el componente
-
+  }, []);
+  
   if (isLoading) {
     return <div>Loading...</div>;
   }
