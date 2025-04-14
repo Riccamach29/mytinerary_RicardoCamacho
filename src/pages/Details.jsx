@@ -39,7 +39,7 @@ export default function CityDetails() {
           </div>
         ) : (
           <p className="text-gray-500">
-            No itineraries available for this city.
+            No itineraries yet for this city
           </p>
         )}
 
