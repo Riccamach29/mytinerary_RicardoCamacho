@@ -33,8 +33,7 @@ const PrintCard = ({ city }) => {
             ${isHovered ? 'scale-110 grayscale' : 'scale-100'}
           `}
         />
-        {/* Centered title that disappears on hover */}
-      <h2 className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-yellow-600 bg-black/50 transition-opacity duration-500 group-hover:opacity-0">
+          <h2 className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-yellow-600 bg-black/50 transition-opacity duration-500 group-hover:opacity-0">
         {city.name}
       </h2>
 
