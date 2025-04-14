@@ -5,7 +5,7 @@ const PrintCard = ({ city }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Image preload
+ 
   useEffect(() => {
     const img = new Image();
     img.src = city.photo;

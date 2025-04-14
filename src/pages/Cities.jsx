@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PrintCard from "../components/PrintCard";
 import { fetchCities } from "../redux/actions/citiesAction";
 import { statusTypes } from "../redux/reducers/citiesReducer";
+import { changeSearch } from "../redux/actions/filterActions";
 
 export default function Cities() {
   const dispatch = useDispatch();
@@ -15,18 +16,23 @@ export default function Cities() {
     dispatch(fetchCities(API_URL));
   }, [dispatch]);
 
+  const handleSearchChange = (e) => {
+    dispatch(changeSearch(e.target.value));
+  };
+
   const filteredCities = cities.filter(city => 
     city.name.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="min-h-[90vh] bg-[#e2e8f0] text-amber-100 flex flex-col items-center p-6 pt-24">
+    <div className="min-h-[90vh] bg-[#e2e8f0] text-amber-100 flex flex-col items-center p-6 pt-24 ">
+      <h2 className="text-3xl font-semibold text-yellow-500 mb-4">Cities</h2>
       <input
         type="text"
         placeholder="Search City..."
         value={searchTerm}
         className="w-75 p-2 border border-gray-400 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 text-black"
-        onChange={(e) => dispatch(changeSearch(e.target.value))}
+        onChange={handleSearchChange}
       />
 
       {isLoading ? (

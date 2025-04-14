@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { UserIcon } from "@heroicons/react/24/outline"; // Importa el ícono de usuario de Heroicons v2
+import { UserIcon } from "@heroicons/react/24/outline"; 
 import logo from "../assets/logo1.png";
 
 const routes = [
   { path: "/home", name: "Home" },
   { path: "/cities", name: "Cities" },
-  { path: "/login", name: "Login", icon: <UserIcon className="h-5 w-5 inline-block" /> }, // Agrega el ícono de usuario
+  { path: "/login", name: "Login", icon: <UserIcon className="h-5 w-5 inline-block" /> }, 
 ];
 
 export default function Navbar() {

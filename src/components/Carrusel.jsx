@@ -14,7 +14,7 @@ const Carrusel = ({ images }) => {
       disableOnInteraction: false,
       pauseOnMouseEnter: true 
     },
-    speed: 800,
+    speed: 1000,
     navigation: true,
     pagination: { 
       clickable: true,

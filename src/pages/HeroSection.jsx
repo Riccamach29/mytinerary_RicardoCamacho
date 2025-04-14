@@ -54,7 +54,7 @@ export default function HeroSection() {
         className="bg-gray-100"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: scrollY > 200 ? 1 : 0, y: scrollY > 200 ? 0 : 50 }}
-        transition={{ duration: 1 }}
+        transition={{ ease: "easeOut", duration: 0.3 }}
       >
         <Home />
       </motion.div>
