@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getOneData } from "../../components/axios";
+import { getOneData, updateData } from "../../components/axios";
+
+
 
 const fetchItineraries = createAsyncThunk(
     'itineraries/fetchByCity',
@@ -9,4 +11,21 @@ const fetchItineraries = createAsyncThunk(
     }
 );
 
-export { fetchItineraries };
+const updateLikes = createAsyncThunk(
+    'itineraries/updateLikes',
+    async (itineraryData) => {
+        const API_URL = "http://localhost:8080/api/itineraries/update";
+        const updatedData = {
+            _id: itineraryData._id,
+            likes: itineraryData.likes + 1
+        };
+        const response = await updateData(API_URL, null, updatedData);
+        // Retornamos el objeto actualizado completo
+        return {
+            ...itineraryData,
+            likes: itineraryData.likes + 1
+        };
+    }
+);
+
+export { fetchItineraries, updateLikes };

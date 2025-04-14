@@ -23,6 +23,7 @@ const PrintCard = ({ city }) => {
         w-full h-full transition-opacity duration-300
         ${imageLoaded ? 'opacity-100' : 'opacity-0'}
       `}>
+        
         <img
           src={city.photo}
           alt={city.name}
@@ -32,6 +33,10 @@ const PrintCard = ({ city }) => {
             ${isHovered ? 'scale-110 grayscale' : 'scale-100'}
           `}
         />
+        {/* Centered title that disappears on hover */}
+      <h2 className="absolute inset-0 flex items-center justify-center text-2xl font-bold text-yellow-600 bg-black/50 transition-opacity duration-500 group-hover:opacity-0">
+        {city.name}
+      </h2>
 
         <div className={`
           absolute inset-0 bg-white/20 backdrop-blur-sm

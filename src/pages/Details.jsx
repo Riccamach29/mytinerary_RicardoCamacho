@@ -26,8 +26,8 @@ export default function CityDetails() {
 
   return (
     <div className="min-h-screen pt-22 bg-[#e2e8f0] flex flex-col items-center justify-center">
-      <div className="w-[90vw] lg:w-[75vw] bg-blue-200 rounded-lg shadow-lg p-2 text-center">
-        <h2 className="text-2xl font-bold mb-2">{cityData?.name || "N/A"}</h2>
+    <div className="w-[90vw] lg:w-[75vw] bg-gray-600 rounded-lg shadow-lg p-2 text-center">
+        <h2 className="text-3xl text-yellow-600  mb-2">{cityData?.name || "N/A"}</h2>
 
         {isLoading ? (
           <div className="animate-spin rounded-full h-8 w-8 border-2 border-blue-500 border-t-transparent mx-auto" />

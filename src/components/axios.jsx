@@ -33,8 +33,7 @@ const getAllData = async (API_URL, needsResponse = true) => {
   // PUT/PATCH (Update)
   const updateData = async (API_URL, id, updatedData) => {
     try {
-      // Con PUT (reemplazo completo)
-      const responsePut = await axios.put(`${API_URL}/${id}`, updatedData)
+      const responsePut = await axios.put(API_URL, updatedData)
       return responsePut.data 
     } catch (error) {
       console.error('Error updating data:', error)

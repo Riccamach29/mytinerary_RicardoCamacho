@@ -20,7 +20,7 @@ export default function Cities() {
   );
 
   return (
-    <div className="min-h-[90vh] bg-[#e2e8f0] text-amber-100 flex flex-col items-center p-6 pt-22">
+    <div className="min-h-[90vh] bg-[#e2e8f0] text-amber-100 flex flex-col items-center p-6 pt-24">
       <input
         type="text"
         placeholder="Search City..."
