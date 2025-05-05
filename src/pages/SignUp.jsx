@@ -36,6 +36,7 @@ const countries = [
   export default function SignUp() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [errors, setErrors] = useState({});
     const [formData, setFormData] = useState({
       firstName: '',
       lastName: '',
@@ -55,8 +56,8 @@ const countries = [
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({}); // Clear previous errors
     
-    // Concatenar nombre y apellido
     const userData = {
       name: `${formData.firstName} ${formData.lastName}`.trim(),
       email: formData.email,
@@ -68,9 +69,16 @@ const countries = [
     try {
       const result = await dispatch(signUp(userData)).unwrap();
       console.log('Usuario creado:', result);
-      navigate('/login'); // Redirigir al login después del registro exitoso
+      navigate('/login');
     } catch (error) {
       console.error('Error al crear usuario:', error);
+      if (error.errors) {
+        const errorMap = {};
+        error.errors.forEach(err => {
+          errorMap[err.path[0]] = err.message;
+        });
+        setErrors(errorMap);
+      }
     }
   };
 
@@ -91,9 +99,15 @@ const countries = [
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 ${
+                errors.name ? 'border-red-500' : 'border-gray-300'
+              }`}
               required
             />
+            {errors.name && (
+              <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+            )}
+            <p className="mt-1 text-xs text-gray-500">Only letters and spaces allowed</p>
           </div>
 
           <div>
@@ -105,9 +119,15 @@ const countries = [
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 ${
+                errors.name ? 'border-red-500' : 'border-gray-300'
+              }`}
               required
             />
+            {errors.name && (
+              <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+            )}
+            <p className="mt-1 text-xs text-gray-500">Only letters and spaces allowed</p>
           </div>
 
           <div>
@@ -119,9 +139,14 @@ const countries = [
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 ${
+                errors.email ? 'border-red-500' : 'border-gray-300'
+              }`}
               required
             />
+            {errors.email && (
+              <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+            )}
           </div>
 
           <div>
@@ -133,9 +158,17 @@ const countries = [
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 ${
+                errors.password ? 'border-red-500' : 'border-gray-300'
+              }`}
               required
             />
+            {errors.password && (
+              <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+            )}
+            <p className="mt-1 text-xs text-gray-500">
+              Must be at least 8 characters long and contain uppercase, lowercase, number and special character
+            </p>
           </div>
 
           <div>
@@ -147,9 +180,17 @@ const countries = [
               name="photoUrl"
               value={formData.photoUrl}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+              className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 ${
+                errors.photo ? 'border-red-500' : 'border-gray-300'
+              }`}
               required
             />
+            {errors.photo && (
+              <p className="mt-1 text-sm text-red-600">{errors.photo}</p>
+            )}
+            <p className="mt-1 text-xs text-gray-500">
+              Must end with .jpg, .jpeg, .png, .gif, or .webp
+            </p>
           </div>
 
           <div>
