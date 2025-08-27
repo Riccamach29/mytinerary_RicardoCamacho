@@ -12,7 +12,7 @@ export default function CityDetails() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const cityId = searchParams.get("cityId");
-  const API_URL = "http://localhost:8080/api/itineraries/itinerariesByCity";
+  const API_URL = "https://mytinerary-back-ricardocamacho.onrender.com/api/itineraries/itinerariesByCity";
 
   const { cityData } = location.state || {};
   const { itineraries, status, error } = useSelector(state => state.itineraries);

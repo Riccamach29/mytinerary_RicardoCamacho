@@ -4,7 +4,7 @@ import axios from 'axios';
 export const login = createAsyncThunk('auth/login', async ({email, password}, {rejectWithValue}) => {
     try {
         const user = {email, password};
-        const response = await axios.post('http://localhost:8080/api/auth/signIn', user);
+        const response = await axios.post('https://mytinerary-back-ricardocamacho.onrender.com/api/auth/signIn', user);
         localStorage.setItem('token', response.data.token); // Guardar el token en localStorage
         return response.data;
     } catch (error) {
@@ -29,7 +29,7 @@ export const logout = createAsyncThunk(
             console.log('Token before logout:', token); // Debug
 
             const response = await axios.post(
-                'http://localhost:8080/api/auth/signOut',
+                'https://mytinerary-back-ricardocamacho.onrender.com/api/auth/signOut',
                 {},
                 {
                     headers: {
@@ -52,7 +52,7 @@ export const signUp = createAsyncThunk(
     'auth/signUp',
     async (userData, { rejectWithValue }) => {
         try {
-            const response = await axios.post('http://localhost:8080/api/users/createOne', userData);
+            const response = await axios.post('https://mytinerary-back-ricardocamacho.onrender.com/api/users/createOne', userData);
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response.data);

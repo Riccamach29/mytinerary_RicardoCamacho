@@ -14,7 +14,7 @@ const fetchItineraries = createAsyncThunk(
 const updateLikes = createAsyncThunk(
     'itineraries/updateLikes',
     async (itineraryData) => {
-        const API_URL = "http://localhost:8080/api/itineraries/update";
+        const API_URL = "https://mytinerary-back-ricardocamacho.onrender.com/api/itineraries/update";
         const updatedData = {
             _id: itineraryData._id,
             likes: itineraryData.likes + 1

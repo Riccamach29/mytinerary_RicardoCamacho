@@ -8,7 +8,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const { images, status, error } = useSelector(state => state.carousel);
   const isLoading = status === statusTypes.PENDING;
-  const API_URL = "http://localhost:8080/api/cities/allCities";
+  const API_URL = "https://mytinerary-back-ricardocamacho.onrender.com/api/cities/allCities";
 
   useEffect(() => {
     dispatch(fetchCarouselImages(API_URL));
